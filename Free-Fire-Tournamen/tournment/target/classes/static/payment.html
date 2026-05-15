@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment — Free Fire Tournament</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+</head>
+<body class="no-scroll">
+
+<div class="ambient-glow"></div>
+
+<header>
+    <div class="logo">FREEFIRE</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="rules.html">Rules</a>
+        <a href="contact.html">Contact</a>
+        <a href="tournaments.html" class="btn btn-sm">Register Now</a>
+    </nav>
+</header>
+
+<div class="page-header fade-up">
+    <h1>Complete <span>Payment</span></h1>
+    <p>Scan, pay, and upload your screenshot to confirm registration</p>
+</div>
+
+<div class="payment-container fade-up-d1">
+    <div class="payment-card" id="paymentCard">
+
+        <div class="payment-steps">
+            <div class="payment-step active">
+                <span class="step-num">✓</span> Registered
+            </div>
+            <div class="payment-step active">
+                <span class="step-num">2</span> Pay Fee
+            </div>
+            <div class="payment-step" id="step3">
+                <span class="step-num">3</span> Confirmed
+            </div>
+        </div>
+
+        <p class="payment-info">Scan the QR code below to pay the tournament entry fee</p>
+
+        <div class="qr-wrapper">
+            <img src="/images/qr1.jpeg" alt="Payment QR Code">
+        </div>
+
+        <p class="payment-info">After payment, upload the screenshot below</p>
+
+        <form id="uploadForm">
+            <div class="upload-area">
+                <div class="upload-icon"><i class="fas fa-upload"></i></div>
+                <div class="upload-text">Choose your payment screenshot</div>
+                <div class="form-group" style="margin-bottom:0;">
+                    <input type="file" name="file" accept="image/*" required>
+                </div>
+            </div>
+            <button type="submit" class="btn" style="width:100%;justify-content:center;">
+                <i class="fas fa-check"></i> Upload & Confirm
+            </button>
+        </form>
+        <div style="display: flex; gap: 12px; margin-top: 16px; justify-content: flex-start;">
+            <a href="tournaments.html" class="btn-back">← Back</a>
+        </div>
+    </div>
+
+    <!-- Success Message (Hidden by default) -->
+    <div class="payment-card" id="successCard" style="display: none;">
+        <div class="payment-steps">
+            <div class="payment-step active">
+                <span class="step-num">✓</span> Registered
+            </div>
+            <div class="payment-step active">
+                <span class="step-num">✓</span> Pay Fee
+            </div>
+            <div class="payment-step active">
+                <span class="step-num">✓</span> Confirmed
+            </div>
+        </div>
+
+        <div class="success-icon">✓</div>
+
+        <h2 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; margin-bottom: 12px;">
+            Registration Complete!
+        </h2>
+
+        <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.6; font-size: 13px;">
+            Your payment is being verified by our team.<br>
+            Soon, a confirmation email will be sent to your registered email address.
+        </p>
+
+        <div class="success-details">
+            <div class="detail-item">
+                <span class="detail-icon">✓</span>
+                <span>Team registered successfully</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">✓</span>
+                <span>Payment confirmed</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">✓</span>
+                <span>Confirmation email will be sent</span>
+            </div>
+        </div>
+
+        <p style="color: var(--text-secondary); text-align: center; margin: 20px 0; font-size: 12px;">
+            Want to register another team?
+        </p>
+
+        <div style="display: flex; gap: 12px; flex-direction: column;">
+            <a href="tournaments.html" class="btn" style="text-decoration: none; justify-content: center; width: 100%;">
+                <i class="fas fa-clipboard"></i> Register Another Team
+            </a>
+            <a href="index.html" class="btn btn-outline" style="text-decoration: none; justify-content: center; width: 100%;">
+                <i class="fas fa-home"></i> Back to Home
+            </a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-brand">FREEFIRE TOURNAMENT</div>
+    <p>&copy; 2026 Free Fire Tournament. All Rights Reserved.</p>
+</footer>
+
+<script src="/js/config.js"></script>
+<script>
+    const uploadForm = document.getElementById('uploadForm');
+    const paymentCard = document.getElementById('paymentCard');
+    const successCard = document.getElementById('successCard');
+    const step3 = document.getElementById('step3');
+
+    uploadForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const fileInput = document.querySelector('input[type="file"]');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert('Please select a file');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', file);
+
+        try {
+            const response = await fetch(API_BASE + '/teams/upload', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok) {
+                // Hide upload form, show success
+                paymentCard.style.display = 'none';
+                successCard.style.display = 'block';
+                step3.classList.add('active');
+
+                // Scroll to success
+                successCard.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('❌ Error uploading file. Please try again.');
+            }
+        } catch (error) {
+            alert('❌ Error: ' + error.message);
+        }
+    });
+</script>
+
+</body>
+</html>

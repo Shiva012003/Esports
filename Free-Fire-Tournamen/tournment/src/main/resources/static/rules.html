@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rules — Free Fire Tournament</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="no-scroll">
+
+<div class="ambient-glow"></div>
+
+<script>
+function downloadRulesAsPDF() {
+    const htmlContent = `
+        <div style="font-family: Arial, sans-serif; color: black; padding: 20px;">
+            <h1 style="text-align: center; color: black; margin-bottom: 30px; font-size: 24px;">FREE FIRE TOURNAMENT RULES</h1>
+            
+            <div style="margin-bottom: 20px;">
+                <h2 style="color: black; font-weight: bold; font-size: 16px; margin-bottom: 8px;">1. No Hacks or Cheats</h2>
+                <p style="color: black; font-size: 14px; margin: 0; line-height: 1.5;">Any hack, mod or cheat leads to a permanent ban.</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h2 style="color: black; font-weight: bold; font-size: 16px; margin-bottom: 8px;">2. Emulators Not Allowed</h2>
+                <p style="color: black; font-size: 14px; margin: 0; line-height: 1.5;">Mobile devices only — emulator users will be disqualified.</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h2 style="color: black; font-weight: bold; font-size: 16px; margin-bottom: 8px;">3. Join On Time</h2>
+                <p style="color: black; font-size: 14px; margin: 0; line-height: 1.5;">Join within 5 minutes of room ID being shared or be disqualified.</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h2 style="color: black; font-weight: bold; font-size: 16px; margin-bottom: 8px;">4. No Abusive Behavior</h2>
+                <p style="color: black; font-size: 14px; margin: 0; line-height: 1.5;">Toxic behavior or harassment leads to an immediate ban.</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h2 style="color: black; font-weight: bold; font-size: 16px; margin-bottom: 8px;">5. Room ID via WhatsApp</h2>
+                <p style="color: black; font-size: 14px; margin: 0; line-height: 1.5;">Room ID shared on WhatsApp group 15 mins before the match.</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h2 style="color: black; font-weight: bold; font-size: 16px; margin-bottom: 8px;">6. Non-Refundable Entry</h2>
+                <p style="color: black; font-size: 14px; margin: 0; line-height: 1.5;">Entry fees are non-refundable. Ensure your team is ready.</p>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h2 style="color: black; font-weight: bold; font-size: 16px; margin-bottom: 8px;">7. Admin Decision is Final</h2>
+                <p style="color: black; font-size: 14px; margin: 0; line-height: 1.5;">All disputes resolved by admin — decisions are binding.</p>
+            </div>
+        </div>
+    `;
+    
+    const element = document.createElement('div');
+    element.innerHTML = htmlContent;
+    
+    const opt = {
+        margin: 15,
+        filename: 'FreeFire_Tournament_Rules.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2, backgroundColor: '#ffffff' },
+        jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+    };
+    
+    html2pdf().set(opt).from(element).save();
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const btn = document.getElementById('downloadPdfBtn');
+    if (btn) {
+        btn.addEventListener('click', downloadRulesAsPDF);
+    }
+});
+</script>
+
+<header>
+    <div class="logo">FREEFIRE</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="rules.html" class="nav-active">Rules</a>
+        <a href="contact.html">Contact</a>
+        <a href="tournaments.html" class="btn btn-sm">Register Now</a>
+    </nav>
+</header>
+
+<div class="page-header fade-up">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 40px; flex-wrap: wrap;">
+        <h1>Tournament <span>Rules</span></h1>
+        <button id="downloadPdfBtn" class="pdf-download-btn"><i class="fas fa-download"></i> Download RULES</button>
+    </div>
+    <p>Read carefully before registering — violations lead to permanent bans</p>
+</div>
+
+<div class="rules-container">
+    <div class="rules-grid">
+
+        <div class="rule-item fade-up">
+            <div class="rule-number">1</div>
+            <div class="rule-content">
+                <h3>No Hacks or Cheats</h3>
+                <p>Any hack, mod or cheat leads to a permanent ban.</p>
+            </div>
+        </div>
+
+        <div class="rule-item fade-up">
+            <div class="rule-number">2</div>
+            <div class="rule-content">
+                <h3>Emulators Not Allowed</h3>
+                <p>Mobile devices only — emulator users will be disqualified.</p>
+            </div>
+        </div>
+
+        <div class="rule-item fade-up-d1">
+            <div class="rule-number">3</div>
+            <div class="rule-content">
+                <h3>Join On Time</h3>
+                <p>Join within 5 minutes of room ID being shared or be disqualified.</p>
+            </div>
+        </div>
+
+        <div class="rule-item fade-up-d1">
+            <div class="rule-number">4</div>
+            <div class="rule-content">
+                <h3>No Abusive Behavior</h3>
+                <p>Toxic behavior or harassment leads to an immediate ban.</p>
+            </div>
+        </div>
+
+        <div class="rule-item fade-up-d2">
+            <div class="rule-number">5</div>
+            <div class="rule-content">
+                <h3>Room ID via WhatsApp</h3>
+                <p>Room ID shared on WhatsApp group 15 mins before the match.</p>
+            </div>
+        </div>
+
+        <div class="rule-item fade-up-d2">
+            <div class="rule-number">6</div>
+            <div class="rule-content">
+                <h3>Non-Refundable Entry</h3>
+                <p>Entry fees are non-refundable. Ensure your team is ready.</p>
+            </div>
+        </div>
+
+        <div class="rule-item fade-up-d3">
+            <div class="rule-number">7</div>
+            <div class="rule-content">
+                <h3>Admin Decision is Final</h3>
+                <p>All disputes resolved by admin — decisions are binding.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="footer-brand">FREEFIRE TOURNAMENT</div>
+    <p>&copy; 2026 Free Fire Tournament. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

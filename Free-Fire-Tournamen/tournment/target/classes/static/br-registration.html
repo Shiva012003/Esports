@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Royale Registration — Free Fire Tournament</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+</head>
+<body class="no-scroll">
+
+<div class="ambient-glow"></div>
+
+<header>
+    <div class="logo">FREEFIRE</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tournaments.html" class="nav-active">Tournaments</a>
+        <a href="rules.html">Rules</a>
+        <a href="contact.html">Contact</a>
+        <a href="tournaments.html" class="btn btn-sm">Register Now</a>
+    </nav>
+</header>
+
+<div class="page-header fade-up">
+    <h1>Battle Royale <span>Registration</span></h1>
+    <p>Fill in your squad details to enter the tournament</p>
+</div>
+
+<div class="form-container fade-up-d1">
+    <div class="form-card">
+        <form action="http://localhost:8081/teams" method="POST" id="regForm">
+            <input type="hidden" name="tournamentType" value="BR">
+
+            <div class="form-group">
+                <label>Team Name</label>
+                <input type="text" name="teamName" placeholder="e.g. Deadly Vipers" required>
+                <div class="validation-error" id="teamNameError" style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-top: 6px; display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Leader Name (In-Game)</label>
+                <input type="text" name="leaderName" placeholder="Your in-game name" required>
+                <div class="validation-error" id="leaderNameError" style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-top: 6px; display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label>WhatsApp Number</label>
+                <input type="tel" name="whatsapp" placeholder="+91 XXXXX XXXXX" required>
+                <div class="validation-error" id="whatsappError" style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-top: 6px; display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" name="email" placeholder="you@example.com" required>
+                <div class="validation-error" id="emailError" style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-top: 6px; display: none;"></div>
+            </div>
+
+            <div class="form-divider"><span>Team Members</span></div>
+
+            <div class="form-group">
+                <label>Player 2</label>
+                <input type="text" name="player2" placeholder="Player 2 in-game name" required>
+                <div class="validation-error" id="player2Error" style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-top: 6px; display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Player 3</label>
+                <input type="text" name="player3" placeholder="Player 3 in-game name" required>
+                <div class="validation-error" id="player3Error" style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-top: 6px; display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Player 4</label>
+                <input type="text" name="player4" placeholder="Player 4 in-game name" required>
+                <div class="validation-error" id="player4Error" style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-top: 6px; display: none;"></div>
+            </div>
+
+            <div class="form-submit" style="display: flex; gap: 12px;">
+                <a href="tournaments.html" class="btn-back">← Back</a>
+                <button type="submit" class="btn register-btn">
+                    <span class="btn-text"><i class="fas fa-crossed-swords"></i> Register Team</span>
+                    <span class="btn-loader" style="display:none;">
+                        <span class="spinner"></span>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-brand">FREEFIRE TOURNAMENT</div>
+    <p>&copy; 2026 Free Fire Tournament. All Rights Reserved.</p>
+</footer>
+
+<script src="/js/config.js"></script>
+<script>
+    document.getElementById("regForm").action = API_BASE + "/teams";
+
+    function validatePhone(phone) {
+        const phoneRegex = /^[6-9]\d{9}$/;
+        return phoneRegex.test(phone.replace(/\D/g, ''));
+    }
+
+    function validateRequired(value) {
+        return value.trim().length > 0;
+    }
+
+    const regForm = document.getElementById('regForm');
+    const teamNameInput = document.querySelector('input[name="teamName"]');
+    const leaderNameInput = document.querySelector('input[name="leaderName"]');
+    const whatsappInput = document.querySelector('input[name="whatsapp"]');
+    const emailInput = document.querySelector('input[name="email"]');
+    const player2Input = document.querySelector('input[name="player2"]');
+    const player3Input = document.querySelector('input[name="player3"]');
+    const player4Input = document.querySelector('input[name="player4"]');
+
+    regForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const teamNameError = document.getElementById('teamNameError');
+        const leaderNameError = document.getElementById('leaderNameError');
+        const whatsappError = document.getElementById('whatsappError');
+        const emailError = document.getElementById('emailError');
+        const player2Error = document.getElementById('player2Error');
+        const player3Error = document.getElementById('player3Error');
+        const player4Error = document.getElementById('player4Error');
+        
+        // Clear all errors
+        teamNameError.style.display = 'none';
+        leaderNameError.style.display = 'none';
+        whatsappError.style.display = 'none';
+        emailError.style.display = 'none';
+        player2Error.style.display = 'none';
+        player3Error.style.display = 'none';
+        player4Error.style.display = 'none';
+        
+        let hasError = false;
+        
+        // Validate Team Name
+        if (!validateRequired(teamNameInput.value)) {
+            teamNameError.textContent = '✗ Team name cannot be empty';
+            teamNameError.style.display = 'block';
+            hasError = true;
+        }
+        
+        // Validate Leader Name
+        if (!validateRequired(leaderNameInput.value)) {
+            leaderNameError.textContent = '✗ Leader name cannot be empty';
+            leaderNameError.style.display = 'block';
+            hasError = true;
+        }
+        
+        // Validate WhatsApp
+        if (!validatePhone(whatsappInput.value)) {
+            whatsappError.textContent = '✗ Phone must start with 6-9 and contain 10 digits';
+            whatsappError.style.display = 'block';
+            hasError = true;
+        }
+        
+        // Validate Email
+        if (!validateRequired(emailInput.value)) {
+            emailError.textContent = '✗ Email cannot be empty';
+            emailError.style.display = 'block';
+            hasError = true;
+        }
+        
+        // Validate Player 2
+        if (!validateRequired(player2Input.value)) {
+            player2Error.textContent = '✗ Player 2 name cannot be empty';
+            player2Error.style.display = 'block';
+            hasError = true;
+        }
+        
+        // Validate Player 3
+        if (!validateRequired(player3Input.value)) {
+            player3Error.textContent = '✗ Player 3 name cannot be empty';
+            player3Error.style.display = 'block';
+            hasError = true;
+        }
+        
+        // Validate Player 4
+        if (!validateRequired(player4Input.value)) {
+            player4Error.textContent = '✗ Player 4 name cannot be empty';
+            player4Error.style.display = 'block';
+            hasError = true;
+        }
+        
+        if (!hasError) {
+            // Show loading spinner
+            const btn = regForm.querySelector('.register-btn');
+            const btnText = btn.querySelector('.btn-text');
+            const btnLoader = btn.querySelector('.btn-loader');
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'flex';
+            
+            // Submit after delay to show spinner
+            setTimeout(() => {
+                regForm.submit();
+            }, 300);
+        }
+    });
+</script>
+
+</body>
+</html>

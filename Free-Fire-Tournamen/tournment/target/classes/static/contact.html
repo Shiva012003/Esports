@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact — Free Fire Tournament</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+</head>
+<body class="no-scroll">
+
+<div class="ambient-glow"></div>
+
+<header>
+    <div class="logo">FREEFIRE</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tournaments.html">Tournaments</a>
+        <a href="rules.html">Rules</a>
+        <a href="contact.html" class="nav-active">Contact</a>
+        <a href="tournaments.html" class="btn btn-sm">Register Now</a>
+    </nav>
+</header>
+
+<div class="page-header fade-up">
+    <h1>Get in <span>Touch</span></h1>
+    <p>Have questions? Reach out to us through any of these channels</p>
+</div>
+
+<div class="contact-container">
+    <div class="contact-grid fade-up-d1">
+
+        <div class="contact-card">
+            <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+            <h3>WhatsApp</h3>
+            <p>63055 74243</p>
+            <p>70329 84409</p>
+        </div>
+
+        <div class="contact-card">
+            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+            <h3>Email</h3>
+            <p>kouluyshiva@gmail.com</p>
+        </div>
+
+        <div class="contact-card">
+            <div class="contact-icon"><i class="fab fa-instagram"></i></div>
+            <h3>Instagram</h3>
+            <p>@jeswanthrocky</p>
+        </div>
+
+    </div>
+
+    <div class="form-card fade-up-d2" style="max-width:600px;margin:0 auto;">
+        <h2 style="font-family:var(--font-heading);font-size:14px;font-weight:700;letter-spacing:2px;margin-bottom:6px;">Quick Message</h2>
+        <p style="color:var(--text-secondary);font-size:12px;margin-bottom:14px;">Have any queries? Send us your details and we'll get back to you</p>
+
+        <form id="contactForm">
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" name="name" placeholder="Enter your name" required>
+                <div class="validation-error" id="nameError" style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-top: 6px; display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label>WhatsApp Number</label>
+                <input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required>
+                <div class="validation-error" id="phoneError" style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-top: 6px; display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Message</label>
+                <textarea name="message" placeholder="Type your question or message..." rows="4" required></textarea>
+                <div class="validation-info" id="messageInfo" style="color: #a0a0b8; font-size: 13px; font-weight: 600; margin-top: 6px; display: none;">Word count: 0/200</div>
+            </div>
+
+            <div style="color: #ff2d2d; font-size: 13px; font-weight: 700; margin-bottom: 12px; display: none;" id="formErrors"></div>
+
+            <div class="form-submit">
+                <button type="submit" class="btn inquiry-btn" style="width:100%;justify-content:center;">
+                    <span class="btn-text"><i class="fas fa-paper-plane"></i> Send Inquiry</span>
+                    <span class="btn-loader" style="display:none;">
+                        <span class="spinner"></span>
+                    </span>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function validateName(name) {
+            const nameRegex = /^[a-zA-Z\s]+$/;
+            return nameRegex.test(name.trim()) && name.trim().length > 0;
+        }
+
+        function validatePhone(phone) {
+            const phoneRegex = /^[6-9]\d{9}$/;
+            return phoneRegex.test(phone.replace(/\D/g, ''));
+        }
+
+        function validateMessage(message) {
+            const wordCount = message.trim().split(/\s+/).filter(word => word.length > 0).length;
+            return wordCount <= 200;
+        }
+
+        function getWordCount(message) {
+            return message.trim().split(/\s+/).filter(word => word.length > 0).length;
+        }
+
+        const contactForm = document.getElementById('contactForm');
+        const nameInput = document.querySelector('input[name="name"]');
+        const phoneInput = document.querySelector('input[name="phone"]');
+        const messageInput = document.querySelector('textarea[name="message"]');
+        const nameError = document.getElementById('nameError');
+        const phoneError = document.getElementById('phoneError');
+        const messageInfo = document.getElementById('messageInfo');
+        const formErrorsDiv = document.getElementById('formErrors');
+
+        // Real-time message validation
+        messageInput.addEventListener('input', function() {
+            const wordCount = getWordCount(this.value);
+            messageInfo.textContent = `Word count: ${wordCount}/200`;
+            messageInfo.style.display = 'block';
+            if (wordCount > 200) {
+                messageInfo.style.color = '#ff2d2d';
+            } else {
+                messageInfo.style.color = '#a0a0b8';
+            }
+        });
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const name = nameInput.value;
+            const phone = phoneInput.value;
+            const message = messageInput.value;
+            
+            // Clear previous errors
+            nameError.style.display = 'none';
+            phoneError.style.display = 'none';
+            formErrorsDiv.style.display = 'none';
+            let errors = [];
+            
+            // Validate name
+            if (!validateName(name)) {
+                nameError.textContent = '✗ Name must contain only letters and spaces';
+                nameError.style.display = 'block';
+                errors.push('Name validation failed');
+            }
+            
+            // Validate phone
+            if (!validatePhone(phone)) {
+                phoneError.textContent = '✗ Phone must start with 6-9 and contain exactly 10 digits';
+                phoneError.style.display = 'block';
+                errors.push('Phone validation failed');
+            }
+            
+            // Validate message
+            if (!validateMessage(message)) {
+                const wordCount = getWordCount(message);
+                formErrorsDiv.innerHTML = `✗ Message exceeds 200 words (current: ${wordCount} words)`;
+                formErrorsDiv.style.display = 'block';
+                errors.push('Message validation failed');
+            }
+
+            if (errors.length > 0) {
+                return;
+            }
+            
+            const formData = {
+                name: name,
+                phone: phone,
+                message: message
+            };
+
+            // Show loading spinner
+            const btn = contactForm.querySelector('.inquiry-btn');
+            const btnText = btn.querySelector('.btn-text');
+            const btnLoader = btn.querySelector('.btn-loader');
+            btn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoader.style.display = 'flex';
+            
+            // Send inquiry after delay to show spinner
+            setTimeout(async () => {
+                try {
+                    const response = await fetch('http://localhost:8081/teams/api/contact/send-inquiry', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    if (response.ok) {
+                        alert('✅ Inquiry sent successfully! We will contact you soon.');
+                        contactForm.reset();
+                        nameError.style.display = 'none';
+                        phoneError.style.display = 'none';
+                        messageInfo.style.display = 'none';
+                        btn.disabled = false;
+                        btnText.style.display = 'inline';
+                        btnLoader.style.display = 'none';
+                    } else {
+                        alert('❌ Error sending inquiry. Please try again.');
+                        btn.disabled = false;
+                        btnText.style.display = 'inline';
+                        btnLoader.style.display = 'none';
+                    }
+                } catch (error) {
+                    alert('❌ Error: ' + error.message);
+                    btn.disabled = false;
+                    btnText.style.display = 'inline';
+                    btnLoader.style.display = 'none';
+                }
+            }, 300);
+        });
+    </script>
+</div>
+
+<footer>
+    <div class="footer-brand">FREEFIRE TOURNAMENT</div>
+    <p>&copy; 2026 Free Fire Tournament. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

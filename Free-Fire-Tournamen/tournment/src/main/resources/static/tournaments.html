@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournaments — Free Fire Tournament</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
+</head>
+<body class="no-scroll">
+
+<div class="ambient-glow"></div>
+
+<header>
+    <div class="logo">FREEFIRE</div>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="tournaments.html" class="nav-active">Tournaments</a>
+        <a href="rules.html">Rules</a>
+        <a href="contact.html">Contact</a>
+        <a href="tournaments.html" class="btn btn-sm">Register Now</a>
+    </nav>
+</header>
+
+<div class="page-header fade-up">
+    <h1>Choose Your <span>Arena</span></h1>
+    <p>Select a tournament mode and register your squad</p>
+</div>
+
+<div class="tournament-grid">
+
+    <!-- BATTLE ROYALE -->
+    <div class="tournament-card fade-up-d1">
+        <div class="card-header">
+            <span class="card-mode"><i class="fas fa-crown"></i> 4v4 Squad</span>
+            <h2 class="card-title">Battle Royale</h2>
+        </div>
+        <div class="card-body">
+            <div class="card-details">
+                <div class="card-detail">
+                    <div class="detail-label">Prize Pool</div>
+                    <div class="detail-value">₹5,000</div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-label">Entry Fee</div>
+                    <div class="detail-value">₹200</div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-label">Mode</div>
+                    <div class="detail-value">Squad</div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-label">Map</div>
+                    <div class="detail-value">Bermuda</div>
+                </div>
+            </div>
+            <ul class="card-features">
+                <li>4 Players per team</li>
+                <li>Top 3 teams win prizes</li>
+                <li>Room ID shared 15 mins before match</li>
+                <li>Anti-cheat monitored</li>
+            </ul>
+            <button class="btn register-btn" style="width:100%;justify-content:center;" onclick="goToRegistration('br-registration.html')">
+                <span class="btn-text"><i class="fas fa-play"></i> Register Squad</span>
+                <span class="btn-loader" style="display:none;">
+                    <span class="spinner"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+    <!-- CLASH SQUAD -->
+    <div class="tournament-card fade-up-d2">
+        <div class="card-header">
+            <span class="card-mode"><i class="fas fa-crossed-swords"></i> 4v4 Clash</span>
+            <h2 class="card-title">Clash Squad</h2>
+        </div>
+        <div class="card-body">
+            <div class="card-details">
+                <div class="card-detail">
+                    <div class="detail-label">Prize Pool</div>
+                    <div class="detail-value">₹3,000</div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-label">Entry Fee</div>
+                    <div class="detail-value">₹100</div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-label">Mode</div>
+                    <div class="detail-value">CS 4v4</div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-label">Rounds</div>
+                    <div class="detail-value">Best of 7</div>
+                </div>
+            </div>
+            <ul class="card-features">
+                <li>4 Players per team</li>
+                <li>Single elimination bracket</li>
+                <li>Room ID shared 15 mins before match</li>
+                <li>Anti-cheat monitored</li>
+            </ul>
+            <button class="btn register-btn" style="width:100%;justify-content:center;" onclick="goToRegistration('cs-registration.html')">
+                <span class="btn-text"><i class="fas fa-play"></i> Register Squad</span>
+                <span class="btn-loader" style="display:none;">
+                    <span class="spinner"></span>
+                </span>
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="footer-brand">FREEFIRE TOURNAMENT</div>
+    <p>&copy; 2026 Free Fire Tournament. All Rights Reserved.</p>
+</footer>
+
+<script>
+    function goToRegistration(page) {
+        const btn = event.target.closest('.register-btn');
+        const btnText = btn.querySelector('.btn-text');
+        const btnLoader = btn.querySelector('.btn-loader');
+
+        // Disable button and show loader
+        btn.disabled = true;
+        btnText.style.display = 'none';
+        btnLoader.style.display = 'flex';
+
+        // Navigate after a short delay
+        setTimeout(() => {
+            window.location.href = page;
+        }, 300);
+    }
+</script>
+
+</body>
+</html>

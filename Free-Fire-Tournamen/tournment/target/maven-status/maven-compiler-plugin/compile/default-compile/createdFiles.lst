@@ -1,0 +1,6 @@
+com\freeFire\tournment\repository\teamRepository.class
+com\freeFire\tournment\service\EmailService.class
+com\freeFire\tournment\TournmentApplication.class
+com\freeFire\tournment\service\TeamService.class
+com\freeFire\tournment\controller\TeamController.class
+com\freeFire\tournment\model\Team.class
