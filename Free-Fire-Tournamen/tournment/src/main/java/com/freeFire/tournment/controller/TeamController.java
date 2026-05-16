@@ -35,7 +35,7 @@ public class TeamController {
 
         teamService.saveTeam(team);
 
-        response.sendRedirect("/payment.html");
+      response.sendRedirect("https://esports-4ae6.onrender.com/payment.html");
     }
 
     @GetMapping
