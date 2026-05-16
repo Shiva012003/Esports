@@ -52,7 +52,7 @@ if(form){
 
                 alert("BR Registration Successful!");
 
-                window.location.href = "/payment.html";
+                window.location.href = "https://esports-4ae6.onrender.com/payment.html";
 
             } else {
 
@@ -122,7 +122,7 @@ if(csForm){
 
                 alert("CS Registration Successful!");
 
-                window.location.href = "/payment.html";
+                window.location.href = "https://esports-4ae6.onrender.com/payment.html";
 
             } else {
 
