@@ -185,7 +185,7 @@
             // Send inquiry after delay to show spinner
             setTimeout(async () => {
                 try {
-                    const response = await fetch('https://esports-4ae6.onrender.com', {
+                    const response = await fetch('https://esports-4ae6.onrender.com/teams/api/contact/send-inquiry', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
